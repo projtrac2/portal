@@ -8,8 +8,8 @@
           </span>
       </div>
       <div class="col-md-9 col-sm-9" style="padding-top: 8%; padding-left: 4%; height: 100%;">
-          <p>All Projects</p>
-          <p id="numOfProjects">0</p>
+          <p>Pre-Investment</p>
+          <p id="numPreInvestment">0</p>
       </div>
     </div>
   </div>
@@ -22,8 +22,8 @@
         </span>
       </div>
       <div class="col-md-9 col-sm-9" style="padding-top: 8%; padding-left: 4%; height: 100%;">
-        <p>Complete Projects</p>
-        <p id="numOfCompleted">0</p>
+        <p>Planned</p>
+        <p id="numPlanned">0</p>
       </div>
     </div>
   </div>
@@ -36,8 +36,8 @@
         </span>
       </div>
       <div class="col-md-9 col-sm-9" style="padding-top: 8%; padding-left: 4%; height: 100%;">
-        <p>Projects On-Track</p>
-        <p id="numOfOnTrack">0</p>
+        <p>On-Going</p>
+        <p id="numOnGoing">0</p>
       </div>
     </div>
   </div>
@@ -50,12 +50,14 @@
         </span>
       </div>
       <div class="col-md-9 col-sm-9" style="padding-top: 8%; padding-left: 4%; height: 100%;">
-        <p>Pending Implementation</p>
-        <p id="numOfPendingCompletion">0</p>
+        <p>Completed</p>
+        <p id="numCompleted">0</p>
       </div>
     </div>
   </div>
+</div>
 
+{{-- 
   <div class="col-md-3  mb-3">
     <div class="d-flex" style="background-color: #F44336; border: 1px solid #cbd5e1;">
       <div class="col-md-3 col-sm-3" style="background-color: #ad3027; height: 100%; padding-top: 5%; padding-bottom: 5%; padding-left: 3%; padding-right: 2%;">
@@ -111,7 +113,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 
 {{-- <div class="row" >

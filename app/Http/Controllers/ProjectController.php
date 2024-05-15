@@ -112,6 +112,52 @@ class ProjectController extends Controller
         return response($projects);
     }
 
+
+    public function queryTwo(Request $request)
+    {
+
+        $query = Project::query();
+
+        if ($request->sub_county_id) {
+            $query->where('projcommunity', 'like', $request->sub_county_id);
+        }
+
+        if ($request->sub_county_id) {
+            $query->where('projlga', 'like', $request->ward_id);
+        }
+
+        $projects = $query->get();
+        $total_prev_investment = 0;
+        $total_planned = 0;
+        $total_on_going = 0;
+        $total_completed = 0;
+
+        foreach ($projects as $project) {
+            switch ($project->status) {
+                case '0':
+                    $total_prev_investment += 1;
+                    break;
+                case '1':
+                    $total_planned += 1;
+                    break;
+                case '2':
+                    $total_on_going += 1;
+                    break;
+                case '3':
+                    $total_completed += 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return response([
+            $total_prev_investment,
+            $total_planned,
+            $total_on_going,
+            $total_completed,
+        ]);
+    }
+
     public function query(Request $request)
     {
         // remeber to take projects that the id is not supposed to be used
@@ -338,7 +384,7 @@ class ProjectController extends Controller
         }
         // Convert the associative array back to indexed array if needed
         $filteredData = array_values($filteredData);
-       
+
 
 
         for ($t = 0; $t < count($wards); $t++) {
@@ -361,7 +407,7 @@ class ProjectController extends Controller
         return response($alldata);
     }
 
-    public function activityBreakDown() 
+    public function activityBreakDown()
     {
         return view('activity-breakdown');
     }

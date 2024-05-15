@@ -8,7 +8,7 @@
         <meta name="author" content="NobleUI">
         <meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
 
-        <title>NobleUI - Laravel Admin Dashboard Template</title>
+        <title>Projtrac - Public Portal</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet">
         <!-- Fonts -->
@@ -632,14 +632,11 @@
                     console.log(data);
                 },
                 success: function (response) {
-                    $('#numOfProjects').text(response.num_of_projects);
-                    $('#numOfCompleted').text(response.num_completed);
-                    $('#numOfOnTrack').text(response.num_on_track);
-                    $('#numOfPendingCompletion').text(response.num_pending_completion);
-                    $('#numOfBehindSchedule').text(response.num_behind_schedule);
-                    $('#numOfAwaitingProcurement').text(response.num_awaiting_procurement);
-                    $('#numOfOnHold').text(response.num_on_hold);
-                    $('#numOfCancelled').text(response.num_cancelled);
+                    console.log(response);
+                    $('#numPreInvestment').text(response[0]);
+                    $('#numPlanned').text(response[1]);
+                    $('#numOnGoing').text(response[2]);
+                    $('#numCompleted').text(response[3]);
                 }
             });
 
@@ -732,14 +729,10 @@
                     },
                     success: function (response) {
 
-                        $('#numOfProjects').text(response.num_of_projects);
-                        $('#numOfCompleted').text(response.num_completed);
-                        $('#numOfOnTrack').text(response.num_on_track);
-                        $('#numOfPendingCompletion').text(response.num_pending_completion);
-                        $('#numOfBehindSchedule').text(response.num_behind_schedule);
-                        $('#numOfAwaitingProcurement').text(response.num_awaiting_procurement);
-                        $('#numOfOnHold').text(response.num_on_hold);
-                        $('#numOfCancelled').text(response.num_cancelled);
+                  $('#numPreInvestment').text(response[0]);
+                    $('#numPlanned').text(response[1]);
+                    $('#numOnGoing').text(response[2]);
+                    $('#numCompleted').text(response[3]);
                         // projDistributionChart.destroy();
                         // projDistributionName = [];
                         // projDistributionData = [];

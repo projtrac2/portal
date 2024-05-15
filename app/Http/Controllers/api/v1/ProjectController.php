@@ -32,56 +32,35 @@ class ProjectController extends Controller
     public function index()
     {
 
-        // remeber to take projects that the id is not supposed to be used
-        $projects = Project::with('program')->where([['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
-        $numOfProjects = $projects->count();
-        $numOfCompleted = 0;
-        $numOfOnTrack = 0;
-        $numOfPendingCompletion = 0;
-        $numOfBehindSchedule = 0;
-        $numOfAwaitingProcurement = 0;
-        $numOfOnHold = 0;
-        $numOfCancelled = 0;
-        foreach ($projects as $key => $project) {
-            if ($project->projstatus == 5) {
-                $numOfCompleted += 1;
-            }
+        $projects = Project::with('program')->get();
+        $total_prev_investment = 0;
+        $total_planned = 0;
+        $total_on_going = 0;
+        $total_completed = 0;
 
-            if ($project->projstatus == 4) {
-                $numOfOnTrack += 1;
-            }
-
-            if ($project->projstatus == 3) {
-                $numOfPendingCompletion += 1;
-            }
-
-            if ($project->projstatus == 11) {
-                $numOfBehindSchedule += 1;
+        foreach ($projects as $project) {
+            if ($project->projstatus == 0) {
+                $total_prev_investment += 1;
             }
 
             if ($project->projstatus == 1) {
-                $numOfAwaitingProcurement += 1;
-            }
-
-            if ($project->projstatus == 6) {
-                $numOfOnHold += 1;
+                $total_planned += 1;
             }
 
             if ($project->projstatus == 2) {
-                $numOfCancelled += 1;
+                $total_on_going += 1;
+            }
+
+            if ($project->projstatus == 3) {
+                $total_completed += 1;
             }
         }
-
+        
         return response([
-            'num_of_projects' => $numOfProjects,
-            'num_of_completed' => $numOfCompleted,
-            'num_on_track' => $numOfOnTrack,
-            'num_pending_completion' => $numOfPendingCompletion,
-            'num_behind_schedule' => $numOfBehindSchedule,
-            'num_awaiting_procurement' => $numOfAwaitingProcurement,
-            'num_completed' => $numOfCompleted,
-            'num_cancelled' => $numOfCancelled,
-            'num_on_hold' => $numOfOnHold
+            $total_prev_investment,
+            $total_planned,
+            $total_on_going,
+            $total_completed,
         ]);
     }
 
@@ -101,10 +80,78 @@ class ProjectController extends Controller
         return response($wards);
     }
 
+    public function query(Request $request)
+    {
+        $prjs = Project::with('program')->get();
+
+        $projects = new Collection();
+
+        foreach ($prjs as $key => $project) {
+            if ($request->sub_county_id) {
+                $sub_county_id = explode(',', $project->projcommunity);
+                $sub_county_ids = in_array($request->sub_county_id, $sub_county_id);
+                if ($sub_county_ids) {
+                    $projects->push($project);
+                }
+            }
+
+            if ($request->ward_id) {
+                $ward_id = explode(',', $project->projlga);
+                $ward_ids = in_array($request->ward_id, $ward_id);
+                if ($ward_ids) {
+                    $projects->push($project);
+                }
+            }
+
+            if ($request->sub_county_id && $request->ward_id) {
+                $sub_county_id = explode(',', $project->projcommunity);
+                $sub_county_ids = in_array($request->sub_county_id, $sub_county_id);
+                if ($sub_county_ids) {
+                    $projects->push($project);
+                }
+
+                $ward_id = explode(',', $project->projlga);
+                $ward_ids = in_array($request->ward_id, $ward_id);
+                if ($ward_ids) {
+                    $projects->push($project);
+                }
+            }
+        }
+
+        $total_prev_investment = 0;
+        $total_planned = 0;
+        $total_on_going = 0;
+        $total_completed = 0;
+
+        foreach ($projects as $project) {
+            if ($project->projstatus == 0) {
+                $total_prev_investment += 1;
+            }
+
+            if ($project->projstatus == 1) {
+                $total_planned += 1;
+            }
+
+            if ($project->projstatus == 2) {
+                $total_on_going += 1;
+            }
+
+            if ($project->projstatus == 3) {
+                $total_completed += 1;
+            }
+        }
+        return response([
+            $total_prev_investment,
+            $total_planned,
+            $total_on_going,
+            $total_completed,
+        ]);
+    }
+
     /**
      * filter landing page data
      */
-    public function query(Request $request)
+    public function queryTwo(Request $request)
     {
         $financialYears = FinancialYear::all();
         $subCounties = Location::where('parent', '=', null)->get();
@@ -1356,7 +1403,7 @@ class ProjectController extends Controller
             $weekly[$month] = $num_of_weeks;
         }
 
-        
+
 
         // daily
         // $task_start_date = '2023-07-01';

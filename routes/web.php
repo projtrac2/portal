@@ -31,3 +31,6 @@ Route::post('/save-feedback', [ProjectController::class, 'saveFeedBack'])->name(
 Route::get('/activity-targets', [ProjectController::class, 'activityBreakDown']);
 
 Route::get('/insert-admins', [UserInsertController::class, 'insertCEC']);
+
+Route::post('/test-weeks', [ReviewsController::class, 'testWeeks'])->name('text-weeks');
+

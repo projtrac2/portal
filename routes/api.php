@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\v1\ProjectController;
+use App\Http\Controllers\api\v1\ProjectTwoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +27,15 @@ Route::get('/get-wards/{sub_county_id}', [ProjectController::class, 'getWards'])
 
 /**
  * landing page routes
+ * 
+ * changed to the routes below
  */
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects-all');
 Route::post('/projects/filter', [ProjectController::class, 'query'])->name('filter-projects');
+
+Route::get('/quick-stats', [ProjectTwoController::class, 'allProjects'])->name('projects.all');
+Route::get('/project/sub-counties', [ProjectTwoController::class, 'projectPerSubCounty'])->name('projects.subCounty');
+Route::get('/project/all-wards', [ProjectTwoController::class, 'projectPerWard']);
 
 /**
  * projects page data

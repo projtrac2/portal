@@ -862,6 +862,106 @@
                     }
                 })
             }
+
+
+
+            $.ajax({
+                type: "GET",
+                url: "/api/project/sub-counties",
+                processData: false,
+                contentType: false,
+                cache: false,
+                error: function(data){
+                    console.log(data);
+                },
+                success: function (response) {
+                    let template = '';
+                    let num = 1;
+                    for (let i = 0; i < response.length; i++) {
+                        let element = response[i];
+                        template += `
+                            <tr>
+                                <th scope="row">${num}</th>
+                                <td>${element.state}</td>
+                                <td>${element.num_of_projects}</td>
+                                <td>${element.budget}</td>
+                            </tr>
+                        `;
+                        num++;
+                    }
+
+                    $('#prj-tbody').html(template);
+                    
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/api/quick-stats",
+                processData: false,
+                contentType: false,
+                cache: false,
+                error: function(data){
+                    console.log(data);
+                },
+                success: function (response) {
+                    $('#total_prj').text(response.num_of_projects);
+                    $('#total_prj_budget').text('Budget '+response.budget);
+                }
+            });
+
+
+            $.ajax({
+                type: "GET",
+                url: "/api/project/all-wards",
+                processData: false,
+                contentType: false,
+                cache: false,
+                error: function(data){
+                    console.log(data);
+                },
+                success: function (response) {
+                    let template = '';
+                    for (let i = 0; i < response.length; i++) {
+                        let element = response[i];
+                        template += `
+                            <div class="mt-5 mb-5" style="border: 1px solid black; padding: 10px; ">
+                                <p class="text-center" style="border-bottom: 1px solid black; padding-bottom: 10px; font-size: 16px; font-weight: bold">${element.state}</p>
+                                <table class="table table-borderless" >
+                                    <thead class="thead-dark" style="background-color: green; ">
+                                    <tr>
+                                        <th scope="col" style="width: 10%; color: black;">#</th>
+                                        <th scope="col" style="width: 30%; color: black;">Ward</th>
+                                        <th scope="col" style="width: 30%; color: black;">No of projects</th>
+                                        <th scope="col" style="width: 30%; color: black;">Total budgeted amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="wards-tbody">`
+                                        let num = 1;
+                                        for (let t = 0; t < element.ward_details.length; t++) {
+                                            let ward = element.ward_details[t];
+                                            template += `
+                                                <tr>
+                                                    <th scope="row">${num}</th>
+                                                    <td>${ward.state}</td>
+                                                    <td>${ward.budget}</td>
+                                                    <td>${ward.num_of_projects}</td>
+                                                </tr>
+                                            `;
+                                            num++;
+                                        }
+                                    template+=`
+                                    </tbody>
+                                </table>
+                            </div>
+                        `;
+                        num++;
+                    }
+
+                    $('#ward-div').html(template);
+                    
+                }
+            });
         });
 
 

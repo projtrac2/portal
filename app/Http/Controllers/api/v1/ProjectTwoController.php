@@ -4,7 +4,9 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use App\Models\Program;
 use App\Models\Project;
+use App\Models\Sector;
 use Illuminate\Http\Request;
 
 class ProjectTwoController extends Controller
@@ -14,6 +16,7 @@ class ProjectTwoController extends Controller
      */
     public function allProjects()
     {
+        // 
         $budget = 0;
         $projects = Project::all();
         foreach ($projects as $key => $project) {
@@ -71,5 +74,45 @@ class ProjectTwoController extends Controller
         }
         
         return response($subCounties);
+    }
+
+    public function projectPerDepartment()
+    {
+        $departments = Sector::where('parent','=',0)->get();
+        foreach ($departments as $key => $department) {
+            $preInvestment = [];
+            $planned = [];
+            $onGoing = [];
+            $completed = [];
+            $programs = Program::where('projsector','=',$department->stid)->get();
+            foreach ($programs as $key => $program) {
+                $projects = $program->projects;
+                foreach ($projects as $key => $project) {
+                    if ($project->projstatus == 0) {
+                        array_push($preInvestment, $project);
+                    }
+
+                    if ($project->projstatus == 1) {
+                        array_push($planned, $project);
+                    }
+
+                    if ($project->projstatus == 2) {
+                        array_push($onGoing, $project);
+                    }
+
+                    if ($project->projstatus == 3) {
+                        array_push($completed, $project);
+                    }
+                }
+            }
+
+            $department->data = [
+                "preInvestment" => count($preInvestment),
+                "planned" => count($planned),
+                "onGoing" => count($onGoing),
+                "completed" => count($completed),
+            ];
+        }
+        return response($departments);
     }
 }

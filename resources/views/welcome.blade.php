@@ -910,6 +910,37 @@
                 }
             });
 
+            $.ajax({
+                type: "GET",
+                url: "/api/project/departments",
+                processData: false,
+                contentType: false,
+                cache: false,
+                error: function(data){
+                    console.log(data);
+                },
+                success: function (response) {
+                    console.log(response);
+                    let num = 1;
+                    let template = '';
+                    for (let i = 0; i < response.length; i++) {
+                        let element = response[i];
+                        template += `
+                            <tr>
+                                <td>${num}</td>
+                                <td>${element.sector}</td>
+                                <td>${element.data.preInvestment}</td>
+                                <td>${element.data.planned}</td>
+                                <td>${element.data.onGoing}</td>
+                                <td>${element.data.completed}</td>
+                            </tr>
+                        `;
+                        num++;
+                    }
+                    $('#prj-department').html(template);
+                }
+            });
+
 
             $.ajax({
                 type: "GET",

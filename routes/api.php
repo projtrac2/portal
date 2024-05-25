@@ -36,6 +36,7 @@ Route::post('/projects/filter', [ProjectController::class, 'query'])->name('filt
 Route::get('/quick-stats', [ProjectTwoController::class, 'allProjects'])->name('projects.all');
 Route::get('/project/sub-counties', [ProjectTwoController::class, 'projectPerSubCounty'])->name('projects.subCounty');
 Route::get('/project/all-wards', [ProjectTwoController::class, 'projectPerWard']);
+Route::get('/project/departments', [ProjectTwoController::class, 'projectPerDepartment']);
 
 /**
  * projects page data

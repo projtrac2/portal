@@ -1007,9 +1007,7 @@ class ProjectController extends Controller
         foreach ($sectors as $keys => $sector) {
             $sector->amount = 0;
             $programs = Program::with('projects')->where('projsector', '=', $sector->stid)->get();
-
             foreach ($programs as $key => $program) {
-
                 foreach ($program->projects as $key => $prj) {
                     $sector->amount += $prj->projcost;
                 }

@@ -10,6 +10,36 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-xl-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+          <h6  class="card-title">Projects Per Department</h6>
+          <div style="border: 1px solid black; padding: 10px;">
+            {{-- table --}}
+            <table class="table table-borderless" >
+              <thead class="thead-dark" style="background: green;">
+                <tr>
+                  <th scope="col" style="width: 5%; color: black;">#</th>
+                  <th scope="col" style="width: 30%; color: black;">Department</th>
+                  <th scope="col" style="width: 15%; color: black;">Pre-Investment</th>
+                  <th scope="col" style="width: 15%; color: black;">Planned</th>
+                  <th scope="col" style="width: 15%; color: black;">On-Going</th>
+                  <th scope="col" style="width: 15%; color: black;">Completed</th>
+                </tr>
+              </thead>
+              <tbody id="prj-department">
+                
+              </tbody>
+            </table>
+    
+            {{-- table --}}
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="row">
   <div class="col-xl-12 grid-margin stretch-card">

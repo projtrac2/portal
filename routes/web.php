@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProjectController::class, 'home'])->name('home');
 
-Route::get('/view-projects', [ProjectController::class, 'index'])->name('projects-view');
+Route::get('/view-projects/ongoing', [ProjectController::class, 'index'])->name('projects-view');
+Route::get('/view-projects/completed', [ProjectController::class, 'completed'])->name('projects-completed');
 Route::get('/project-reviews', [ReviewsController::class, 'index'])->name('reviews-view');
 Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project-show');
 Route::get('/project-outputs/{id}', [ProjectController::class, 'outputTarget'])->name('project-targets');

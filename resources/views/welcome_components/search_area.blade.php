@@ -5,25 +5,25 @@
             <div class="hidden col-md-3 col-sm-12 mb-3 col-xs-12">
                 <label for="" class="form-label">From Financial Year</label>
                 <select class="form-select" id="from">
-                    <option value="Select...">Select...</option>  
+                    <option selected value="Select...">Select...</option>  
                 </select>
             </div>
             <div  class=" hidden col-md-3  col-sm-12 mb-3 col-xs-12">
                 <label for="" class="form-label">To Financial Year</label>
                 <select class="form-select" id="to">
-                    <option value="Select...">Select...</option> 
+                    <option selected value="Select...">Select...</option> 
                 </select>
             </div>
             <div class="col-md-3 col-sm-12 mb-3 col-xs-12">
                 <label for="" class="form-label">Sub-County</label>
                 <select class="form-select subCounty" id="subCounty">
-                    <option value="Select...">Select...</option>  
+                    <option selected value="Select...">Select...</option>  
                 </select>
             </div>
             <div class="col-md-3 col-sm-12 mb-3 col-xs-12">
                 <label for="" class="form-label">Ward</label>
                 <select class="form-select ward" id="ward">
-                    <option value="Select...">Select...</option>  
+                    <option selected value="Select...">Select...</option>  
                 </select>
             </div>
             

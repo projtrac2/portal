@@ -55,7 +55,7 @@
               @include('layouts.header')
               <div class="page-content">
                 @include('welcome_components.search_area')
-                @include('projects.projects_components.table')
+                @include('projects.completed.table')
               </div>
               <div class="legal">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 copyright">
@@ -84,13 +84,11 @@
         {{-- <script src="{{ asset('assets/js/data-table.js') }}"></script> --}}
         <script async>
             $(function () {
-                
-
 
                 let table;
                 $.ajax({
                     type: "GET",
-                    url: "/api/projects/ongoing",
+                    url: "/api/projects/completed",
                     processData: false,
                     contentType: false,
                     cache: false,
@@ -115,8 +113,8 @@
                                     <td>${t}</td>
                                     <td data-bs-toggle="tooltip" data-bs-title="Default tooltip">${message[i].projname}</td>
                                     <td>${message[i].location} - ${message[i].ward}</td>
-                                    <td>${status}</td>
-                                    <td>${message[i].projenddate}</td>
+                                    <td>${message[p].projstartdate}</td>
+                                    <td>${message[p].projdatecompleted}</td>
                                     <td>
                                         <div class="d-flex gap-3">
                                             ${message[i].link}
@@ -129,7 +127,7 @@
                             t++;
                         }
 
-                        $('#on_going').text(message.length);
+                        $('#completed_total').text(message.length);
 
                         table = $('#dataTableExample').DataTable({
                             "aLengthMenu": [
@@ -224,7 +222,7 @@
                     data.append('to', to);
                     $.ajax({
                         type: "POST",
-                        url: "/api/projects/ongoing/query",
+                        url: "/api/projects/completed/query",
                         processData: false,
                         contentType: false,
                         cache: false,
@@ -257,8 +255,8 @@
                                         <td>${t}</td>
                                         <td>${message[p].projname}</td>
                                         <td>${message[p].location} - ${message[p].ward}</td>
-                                        <td>${status}</td>
-                                        <td>${message[p].projenddate}</td>
+                                        <td>${message[p].projstartdate}</td>
+                                        <td>${message[p].projdatecompleted}</td>
                                         <td>
                                             <div class="d-flex gap-3">
                                                 ${message[p].link}
@@ -271,7 +269,8 @@
                                 $('#proj-table').append(data);   
                                 t++;                     
                             }
-                            $('#on_going').text(message.length);
+                            $('#completed_total').text(message.length);
+
                             table = $('#dataTableExample').DataTable({
                             "aLengthMenu": [
                                 [10, 30, 50, -1],

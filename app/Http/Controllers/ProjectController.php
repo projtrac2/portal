@@ -74,6 +74,11 @@ class ProjectController extends Controller
         return view('projects.view');
     }
 
+    public function completed()
+    {
+        return view('projects.completed');
+    }
+
     public function filterProject(Request $request)
     {
         $projects = Project::with('program')->where([['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
@@ -276,7 +281,7 @@ class ProjectController extends Controller
     public function getFeedback(Request $request, $id)
     {
         $project = Project::find(Crypt::decrypt($id));
-        $back_url = $request->server->getParams()['HTTP_REFERER'];
+        $back_url = request()->headers->get('referer');
         $back_route = explode('/', $back_url);
         if (isset($back_route[3]) && isset($back_route[4])) {
             $back_route = '/' . $back_route[3] . '/' . $back_route[4];

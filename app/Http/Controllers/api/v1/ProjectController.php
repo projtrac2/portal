@@ -561,7 +561,7 @@ class ProjectController extends Controller
     public function projectDistributionPerSubCounty()
     {
         $subCounties = Location::where('parent', '=', null)->get();
-        $projects = Project::with('program')->where([['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
+        $projects = Project::with('program')->get();
         foreach ($projects as $key => $project) {
             $sub_county_id = explode(',', $project->projcommunity);
             foreach ($subCounties as $key => $subCounty) {
@@ -658,11 +658,11 @@ class ProjectController extends Controller
     public function projectDistributionPerSubCountyQuery(Request $request)
     {
         $subCounties = Location::where('parent', '=', null)->get();
-        $projects = Project::with('program')->where([['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
+        $projects = Project::with('program')->get();
         // remeber to take projects that the id is not supposed to be used
         // from
         if ($request->from != 'Select...' && $request->to == 'Select...') {
-            $projects = Project::where([['projfscyear', '>=', $request->from], ['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
+            $projects = Project::where([['projfscyear', '>=', $request->from]])->get();
             if ($projects->count() > 0) {
                 foreach ($projects as $key => $prj) {
                     $sub_county_id = explode(',', $prj->projcommunity);
@@ -683,7 +683,7 @@ class ProjectController extends Controller
         // to
 
         if ($request->to != 'Select...' && $request->from == 'Select...') {
-            $projects = Project::where([['projfscyear', '<=', $request->to], ['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
+            $projects = Project::where('projfscyear', '<=', $request->to)->get();
             if ($projects->count() > 0) {
                 foreach ($projects as $key => $prj) {
                     $sub_county_id = explode(',', $prj->projcommunity);
@@ -703,8 +703,8 @@ class ProjectController extends Controller
 
         // from to
 
-        if ($request->to != 'Select...' && $request->from != 'Select...') {
-            $projects = Project::where([['projfscyear', '>=', $request->from], ['projfscyear', '<=', $request->to], ['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
+        if ($request->to != 'Select...' && $request->from != 'Select...' && $request->sub_county_id == 'Select...' && $request->ward_id == 'Select...') {
+            $projects = Project::where([['projfscyear', '>=', $request->from], ['projfscyear', '<=', $request->to]])->get();
             if ($projects->count() > 0) {
                 foreach ($projects as $key => $prj) {
                     $sub_county_id = explode(',', $prj->projcommunity);
@@ -728,7 +728,7 @@ class ProjectController extends Controller
         if ($request->sub_county_id != 'Select...' && $request->ward_id == 'Select...' && $request->to == 'Select...' && $request->from == 'Select...') {
 
             $subCounties = Location::where('id', '=', $request->sub_county_id)->get();
-            $prjs = Project::where([['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
+            $prjs = Project::all();
             $projects = new Collection();
             if ($prjs->count() > 0) {
                 foreach ($prjs as $key => $prj) {
@@ -746,7 +746,7 @@ class ProjectController extends Controller
         // sub county to
         if ($request->sub_county_id != 'Select...' && $request->ward_id == 'Select...' && $request->to != 'Select...' && $request->from == 'Select...') {
             $subCounties = Location::where('id', '=', $request->sub_county_id)->get();
-            $prjs = Project::where([['projstatus', '>', 0], ['projstatus', '!=', 3], ['projfscyear', '<=', $request->to]])->get();
+            $prjs = Project::where('projfscyear', '<=', $request->to)->get();
             $projects = new Collection();
             if ($prjs->count() > 0) {
                 foreach ($prjs as $key => $prj) {
@@ -764,7 +764,7 @@ class ProjectController extends Controller
         // sub county from
         if ($request->sub_county_id != 'Select...' && $request->ward_id == 'Select...' && $request->to == 'Select...' && $request->from != 'Select...') {
             $subCounties = Location::where('id', '=', $request->sub_county_id)->get();
-            $prjs = Project::where([['projstatus', '>', 0], ['projstatus', '!=', 3], ['projfscyear', '>=', $request->from]])->get();
+            $prjs = Project::where('projfscyear', '>=', $request->from)->get();
             $projects = new Collection();
             if ($prjs->count() > 0) {
                 foreach ($prjs as $key => $prj) {
@@ -782,7 +782,7 @@ class ProjectController extends Controller
         // sub county to from
         if ($request->sub_county_id != 'Select...' && $request->ward_id == 'Select...' && $request->to != 'Select...' && $request->from != 'Select...') {
             $subCounties = Location::where('id', '=', $request->sub_county_id)->get();
-            $prjs = Project::where([['projstatus', '>', 0], ['projstatus', '!=', 3], ['projfscyear', '>=', $request->from], ['projfscyear', '<=', $request->to]])->get();
+            $prjs = Project::where([['projfscyear', '>=', $request->from], ['projfscyear', '<=', $request->to]])->get();
             $projects = new Collection();
             if ($prjs->count() > 0) {
                 foreach ($prjs as $key => $prj) {
@@ -802,7 +802,7 @@ class ProjectController extends Controller
             $subCounties = Location::where('id', '=', $request->sub_county_id)->get();
             foreach ($subCounties as $key => $subCounty) {
                 $mWards = [];
-                $prjs = Project::where([['projstatus', '>', 0], ['projstatus', '!=', 3]])->get();
+                $prjs = Project::all();
 
                 $projects = new Collection();
                 foreach ($prjs as $keys => $prj) {
@@ -838,7 +838,7 @@ class ProjectController extends Controller
             $subCounties = Location::where('id', '=', $request->sub_county_id)->get();
             foreach ($subCounties as $key => $subCounty) {
                 $mWards = [];
-                $prjs = Project::where([['projstatus', '>', 0], ['projstatus', '!=', 3], ['projfscyear', '<=', $request->to]])->get();
+                $prjs = Project::where('projfscyear', '<=', $request->to)->get();
 
                 $projects = new Collection();
                 foreach ($prjs as $keys => $prj) {
@@ -874,7 +874,7 @@ class ProjectController extends Controller
             $subCounties = Location::where('id', '=', $request->sub_county_id)->get();
             foreach ($subCounties as $key => $subCounty) {
                 $mWards = [];
-                $prjs = Project::where([['projstatus', '>', 0], ['projstatus', '!=', 3], ['projfscyear', '>=', $request->from]])->get();
+                $prjs = Project::where('projfscyear', '>=', $request->from)->get();
 
                 $projects = new Collection();
                 foreach ($prjs as $keys => $prj) {
@@ -910,7 +910,7 @@ class ProjectController extends Controller
             $subCounties = Location::where('id', '=', $request->sub_county_id)->get();
             foreach ($subCounties as $key => $subCounty) {
                 $mWards = [];
-                $prjs = Project::where([['projstatus', '>', 0], ['projstatus', '!=', 3], ['projfscyear', '>=', $request->from], ['projfscyear', '<=', $request->to]])->get();
+                $prjs = Project::where(['projfscyear', '>=', $request->from], ['projfscyear', '<=', $request->to])->get();
 
                 $projects = new Collection();
                 foreach ($prjs as $keys => $prj) {

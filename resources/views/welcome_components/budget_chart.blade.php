@@ -41,56 +41,7 @@
 </div>
 
 
-<div class="row">
-  <div class="col-xl-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <h6 class="card-title">Projects Per SubCounty</h6>
-        <div style="border: 1px solid black; padding: 10px;">
-        {{-- table --}}
-        <table class="table table-borderless" >
-          <thead class="thead-dark" style="background: green;">
-            <tr>
-              <th scope="col" style="width: 10%; color: black;">#</th>
-              <th scope="col" style="width: 30%; color: black;">Subcounty</th>
-              <th scope="col" style="width: 30%; color: black;">No of projects</th>
-              <th scope="col" style="width: 30%; color: black;">Total budgeted amount</th>
-            </tr>
-          </thead>
-          <tbody id="prj-tbody">
-           
-            
-          </tbody>
-        </table>
 
-        {{-- table --}}
-        
-        </div>
-       
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-xl-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <h6 class="card-title">Projects Per Ward</h6>
-        <div style="padding: 10px;">
-        {{-- table --}}
-        <div id="ward-div">
-
-        </div>
-        {{-- table --}}
-        
-        </div>
-       
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="row">
     <div class="col-xl-12 grid-margin stretch-card">

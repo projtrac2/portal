@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\v1\OnGoingProjectsController;
 use App\Http\Controllers\api\v1\ProjectController;
 use App\Http\Controllers\api\v1\ProjectTwoController;
 use Illuminate\Http\Request;
@@ -37,6 +38,20 @@ Route::get('/quick-stats', [ProjectTwoController::class, 'allProjects'])->name('
 Route::get('/project/sub-counties', [ProjectTwoController::class, 'projectPerSubCounty'])->name('projects.subCounty');
 Route::get('/project/all-wards', [ProjectTwoController::class, 'projectPerWard']);
 Route::get('/project/departments', [ProjectTwoController::class, 'projectPerDepartment']);
+Route::get('/project-status', [ProjectTwoController::class, 'getProjectByStatus']);
+
+/** query per department */
+Route::post('/quick-stats/query', [ProjectTwoController::class, 'allProjectsQuery']);
+Route::post('/project-status/query', [ProjectTwoController::class, 'getProjectByStatusQuery']);
+Route::post('/projects/departments/query', [ProjectTwoController::class, 'projectPerDepartmentQuery']);
+
+// projects ongoing
+Route::get('/projects/ongoing', [OnGoingProjectsController::class, 'onGoingProjects']);
+Route::post('/projects/ongoing/query', [OnGoingProjectsController::class, 'onGoingProjectsQuery']);
+
+// projects completed
+Route::get('/projects/completed', [OnGoingProjectsController::class, 'completedProjects']);
+Route::post('/projects/completed/query', [OnGoingProjectsController::class, 'completedProjectsQuery']);
 
 /**
  * projects page data

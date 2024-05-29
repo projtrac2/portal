@@ -16,10 +16,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent1">
     <ul class="navbar-nav me-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="visually-hidden">(current)</span></a>
+        <a class="nav-link" style="color: black;" href="/">Home <span class="visually-hidden">(current)</span></a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{route('projects-view')}}">Projects</a>
+      </li> --}}
+      <li class="nav-item active">
+        <a class="nav-link" style="color: black;" href="{{route('projects-view')}}">On-going Projects</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" style="color: black;" href="{{route('projects-completed')}}">Completed Projects</a>
       </li>
     </ul>
   </div>

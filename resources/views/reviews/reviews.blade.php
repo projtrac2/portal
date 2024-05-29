@@ -8,7 +8,7 @@
         <meta name="author" content="NobleUI">
         <meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
 
-        <title>NobleUI - Laravel Admin Dashboard Template</title>
+        <title>Projtrac Systems - Public Portal</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -155,10 +155,10 @@
               </div>
               <div class="legal">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 copyright">
-                    ProjTrac M&amp;E - Your Best Result-Based Monitoring &amp; Evaluation System.
+                    ProjTrac RBMS - Your Best Result-Based Management System
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 version" align="right">
-                    Copyright @ 2017 -2024. ProjTrac Systems Ltd.
+                    Copyright @ 2017 - 2024. <a href="https://projtrac.co.ke/">ProjTrac Systems Ltd</a>
                 </div>
               </div>
             </div>

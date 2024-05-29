@@ -2,7 +2,7 @@
     <div class="col-md-12 grid-margin stretch-card">  
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title" style="color: #1d4ed8">On-going Projects Table - <span id="on_going"></span></h6>
+                <h6 class="card-title" style="color: #1d4ed8">Completed Projects Table - <span id="completed_total"></span></h6>
                 <div class="table-responsive p-4">
                     <table class="table table-bordered table-striped" id="dataTableExample">
                         <thead>
@@ -10,8 +10,8 @@
                                 <th style="color: black">#</th>
                                 <th style="color: black">Project Name</th>
                                 <th style="color: black">Location</th>
-                                <th style="color: black">Status</th>
-                                <th style="color: black">Expected End Date</th>
+                                <th style="color: black">Start Date</th>
+                                <th style="color: black">Date Completed</th>
                                 <th style="color: black">Actions</th>
                             </tr>
                         </thead>
